@@ -1,4 +1,4 @@
-mygmaps-wp
+mygmaps-dotclear
 ==========
 
 A plugin to add Google Maps in Dotclear blog posts
