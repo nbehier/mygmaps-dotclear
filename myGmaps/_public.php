@@ -75,7 +75,7 @@ class myGmapsPublic
 		// Appel depuis un billet, ou depuis une balise de template
 		$sPostId = (! empty($aElements) ) ? $aElements['id'] : $_ctx->posts->post_id ;
 
-		if ($s->myGmaps_enabled /*&& self::hasMap($sPostId) != ''*/) {
+		if ($s->myGmaps_enabled && (is_null($_ctx) || self::hasMap($sPostId) != '') ) {
 			
 			// Map styles. Get more styles from http://snazzymaps.com/
 			
