@@ -63,14 +63,19 @@ class myGmapsPublic
 				'<link rel="stylesheet" type="text/css" href="'.$url.'/css/public.css" />'."\n";
 		}
 	}
-	public static function publicMapContent($core,$_ctx)
+	public static function publicMapContent($core,$_ctx,$aElements = array())
 	{
 		# Settings
 		global $core;
 		$s =& $core->blog->settings->myGmaps;
 		$url = $core->blog->getQmarkURL().'pf='.basename(dirname(__FILE__));
 		
-		if ($s->myGmaps_enabled && self::hasMap($_ctx->posts->post_id) != '') {
+		$sTemplate = '';
+
+		// Appel depuis un billet, ou depuis une balise de template
+		$sPostId = (! empty($aElements) ) ? $aElements['id'] : $_ctx->posts->post_id ;
+
+		if ($s->myGmaps_enabled /*&& self::hasMap($sPostId) != ''*/) {
 			
 			// Map styles. Get more styles from http://snazzymaps.com/
 			
@@ -98,76 +103,91 @@ class myGmapsPublic
 			// Map type
 			$custom_style = false;
 			
-			$meta =& $GLOBALS['core']->meta;
-			$post_map_options = explode(",",$meta->getMetaStr($_ctx->posts->post_meta,'map_options'));
+			// Appel depuis un billet, ou depuis une balise de template
+			$aOptions = array();
+			if (! empty($aElements) ) {
+				$aOptions = $aElements;
+			}
+			else {
+				$meta =& $GLOBALS['core']->meta;
+				$post_map_options = explode(",",$meta->getMetaStr($_ctx->posts->post_meta,'map_options'));
+				$aOptions = array(
+		 			'center' => $post_map_options[0].','.$post_map_options[1],
+		 			'zoom' => $post_map_options[2],
+		 			'style' => $post_map_options[3],
+		 			'map_elements' => $aElements,
+		 			'map_element_category' => $aCategories
+		 		);
+			}
 			
-			if ($post_map_options[3] == 'roadmap') {
-				$mapTypeId = 'google.maps.MapTypeId.ROADMAP';
-			} elseif ($post_map_options[3] == 'satellite') {
-				$mapTypeId = 'google.maps.MapTypeId.SATELLITE';
-			} elseif ($post_map_options[3] == 'hybrid') {
-				$mapTypeId = 'google.maps.MapTypeId.HYBRID';
-			} elseif ($post_map_options[3] == 'terrain') {
-				$mapTypeId = 'google.maps.MapTypeId.TERRAIN';
-			}  elseif ($post_map_options[3] == 'OpenStreetMap') {
-				$mapTypeId = 'OpenStreetMap';
+			
+			if ($aOptions['style'] == 'roadmap') {
+				$aOptions['style'] = 'google.maps.MapTypeId.ROADMAP';
+			} elseif ($aOptions['style'] == 'satellite') {
+				$aOptions['style'] = 'google.maps.MapTypeId.SATELLITE';
+			} elseif ($aOptions['style'] == 'hybrid') {
+				$aOptions['style'] = 'google.maps.MapTypeId.HYBRID';
+			} elseif ($aOptions['style'] == 'terrain') {
+				$aOptions['style'] = 'google.maps.MapTypeId.TERRAIN';
+			}  elseif ($aOptions['style'] == 'OpenStreetMap') {
+				$aOptions['style'] = 'OpenStreetMap';
 			} else {
-				$mapTypeId = $post_map_options[3];
+				$aOptions['style'] = $aOptions['style'];
 				$custom_style = true;
 			}
 			
 			// Create map and listener
 			
-			echo 
+			$sTemplate .=  
 			'<script type="text/javascript">'."\n".
 			"//<![CDATA[\n".
 			'$(function () {'."\n";
 			
-			if ($mapTypeId == 'neutral_blue') {
-				echo
+			if ($aOptions['style'] == 'neutral_blue') {
+				$sTemplate .= 
 				'var neutral_blue_styles = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#193341"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#2c5a71"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#29768a"},{"lightness":-37}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#406d80"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#406d80"}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#3e606f"},{"weight":2},{"gamma":0.84}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"weight":0.6},{"color":"#1a3541"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#2c5a71"}]}];'."\n".
 				'var neutral_blue = new google.maps.StyledMapType(neutral_blue_styles,{name: "Neutral Blue"});'."\n";
 			
-			} elseif ($mapTypeId != 'neutral_blue' && $custom_style) {
+			} elseif ($aOptions['style'] != 'neutral_blue' && $custom_style) {
 				if(is_dir($map_styles_dir_path)) {
 					
-					$map_style_content = file_get_contents($map_styles_dir_path.'/'.$mapTypeId.'_styles.js');
-					$var_styles_name = $mapTypeId.'_styles';
+					$map_style_content = file_get_contents($map_styles_dir_path.'/'.$aOptions['style'].'_styles.js');
+					$var_styles_name = $aOptions['style'].'_styles';
 					$var_name = preg_replace('/_styles/s', '', $var_styles_name);
 					$nice_name = ucwords(preg_replace('/_/s', ' ', $var_name));
-					echo
+					$sTemplate .= 
 					'var '.$var_styles_name.' = '.$map_style_content.';'."\n".
 					'var '.$var_name.' = new google.maps.StyledMapType('.$var_styles_name.',{name: "'.$nice_name.'"});'."\n";
 					
 				}
 			}
 			
-				echo
+				$sTemplate .= 
 				'var myOptions = {'."\n".
-					'zoom: parseFloat('.$post_map_options[2].'),'."\n".
-					'center: new google.maps.LatLng('.$post_map_options[0].','.$post_map_options[1].'),'."\n".
+					'zoom: parseFloat('.$aOptions['zoom'].'),'."\n".
+					'center: new google.maps.LatLng('.$aOptions['center'].'),'."\n".
 					'scrollwheel: false,'."\n".
 					'mapTypeControl: false,'."\n".
 					'mapTypeControlOptions: {'."\n".
-						'mapTypeIds: ["'.$mapTypeId.'"]'."\n".
+						'mapTypeIds: ["'.$aOptions['style'].'"]'."\n".
 					'}'."\n".
 				'};'."\n".
-				'var map_'.$_ctx->posts->post_id.' = new google.maps.Map(document.getElementById("map_canvas_'.$_ctx->posts->post_id.'"), myOptions);'."\n";
+				'var map_'.$sPostId.' = new google.maps.Map(document.getElementById("map_canvas_'.$sPostId.'"), myOptions);'."\n";
 				
 				if ($custom_style) {
-					echo
-					'map_'.$_ctx->posts->post_id.'.mapTypes.set("'.$mapTypeId.'", '.$mapTypeId.');'."\n".
-					'map_'.$_ctx->posts->post_id.'.setMapTypeId("'.$mapTypeId.'");'."\n";
+					$sTemplate .= 
+					'map_'.$sPostId.'.mapTypes.set("'.$aOptions['style'].'", '.$aOptions['style'].');'."\n".
+					'map_'.$sPostId.'.setMapTypeId("'.$aOptions['style'].'");'."\n";
 
-				} elseif ($custom_style == false && $mapTypeId == 'OpenStreetMap') {
-					echo
+				} elseif ($custom_style == false && $aOptions['style'] == 'OpenStreetMap') {
+					$sTemplate .= 
 					'var credit = \'<a href="http://www.openstreetmap.org/copyright">© OpenStreetMap Contributors</a>\';'."\n".
 					'var creditNode = document.createElement(\'div\');'."\n".
 					'creditNode.id = \'credit-control\';'."\n".
 					'creditNode.index = 1;'."\n".
-					'map_'.$_ctx->posts->post_id.'.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(creditNode);'."\n".
+					'map_'.$sPostId.'.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(creditNode);'."\n".
 					'creditNode.innerHTML = credit;'."\n".
-					'map_'.$_ctx->posts->post_id.'.mapTypes.set("OpenStreetMap", new google.maps.ImageMapType({'."\n".
+					'map_'.$sPostId.'.mapTypes.set("OpenStreetMap", new google.maps.ImageMapType({'."\n".
 						'getTileUrl: function(coord, zoom) {'."\n".
 							'return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";'."\n".
 						'},'."\n".
@@ -175,21 +195,21 @@ class myGmapsPublic
 						'name: "OpenStreetMap",'."\n".
 						'maxZoom: 18'."\n".
 					'}));'."\n".
-					'map_'.$_ctx->posts->post_id.'.setMapTypeId("'.$mapTypeId.'");'."\n";
+					'map_'.$sPostId.'.setMapTypeId("'.$aOptions['style'].'");'."\n";
 				} else {
-					echo
-					'map_'.$_ctx->posts->post_id.'.setOptions({mapTypeId: '.$mapTypeId.'});'."\n";
+					$sTemplate .= 
+					'map_'.$sPostId.'.setOptions({mapTypeId: '.$aOptions['style'].'});'."\n";
 				}
 				
-				echo
-				'var infowindow_'.$_ctx->posts->post_id.' = new google.maps.InfoWindow({});'."\n".
-				'google.maps.event.addListener(map_'.$_ctx->posts->post_id.', "click", function (event) {'."\n".
-					'infowindow_'.$_ctx->posts->post_id.'.close();'."\n".
+				$sTemplate .= 
+				'var infowindow_'.$sPostId.' = new google.maps.InfoWindow({});'."\n".
+				'google.maps.event.addListener(map_'.$sPostId.', "click", function (event) {'."\n".
+					'infowindow_'.$sPostId.'.close();'."\n".
 				'});'."\n";
 			
 			// Get map elements
 			
-			$maps_array = explode(",",self::thisPostMap($_ctx->posts->post_id));
+			$maps_array = explode(",",self::thisPostMap($sPostId));
 			
 			$params['post_type'] = 'map';
 			$params['post_status'] = '1';
@@ -218,7 +238,7 @@ class myGmapsPublic
 						$content = '';
 					}
 					
-					echo
+					$sTemplate .= 
 					
 					'var title_'.$maps->post_id.' = "'.html::escapeHTML($maps->post_title).'";'."\n".
 					'var content_'.$maps->post_id.' = \''.$content.'\';'."\n";
@@ -229,12 +249,12 @@ class myGmapsPublic
 					
 					if ($type == 'point of interest') {
 						$marker = explode("|",$list[0]);
-						echo
+						$sTemplate .= 
 						'marker = new google.maps.Marker({'."\n".
 							'icon : "'.$marker[2].'",'."\n".
 							'position: new google.maps.LatLng('.$marker[0].','.$marker[1].'),'."\n".
 							'title: title_'.$maps->post_id.','."\n".
-							'map: map_'.$_ctx->posts->post_id."\n".
+							'map: map_'.$sPostId."\n".
 						'});'."\n".
 						'google.maps.event.addListener(marker, "click", function() {'."\n".
 							'openmarkerinfowindow(this,title_'.$maps->post_id.',content_'.$maps->post_id.');'."\n".
@@ -253,14 +273,14 @@ class myGmapsPublic
 						}
 						$path = substr($coordinates, 0, -1);
 
-						echo
+						$sTemplate .= 
 						'var polyline = new google.maps.Polyline({'."\n".
 							'path: ['.$path.'],'."\n".
 							'strokeColor: "'.$parts[2].'",'."\n".
 							'strokeOpacity: '.$parts[1].','."\n".
 							'strokeWeight: '.$parts[0].''."\n".
 						'});'."\n".
-						'polyline.setMap(map_'.$_ctx->posts->post_id.');'."\n".
+						'polyline.setMap(map_'.$sPostId.');'."\n".
 						'google.maps.event.addListener(polyline, "click", function(event) {'."\n".
 							'var pos = event.latLng;'."\n".
 							'openpolyinfowindow(title_'.$maps->post_id.',content_'.$maps->post_id.',pos);'."\n".
@@ -279,7 +299,7 @@ class myGmapsPublic
 						}
 						$path = substr($coordinates, 0, -1);
 						
-						echo
+						$sTemplate .= 
 						'var polygon = new google.maps.Polygon({'."\n".
 							'path: ['.$path.'],'."\n".
 							'strokeColor: "'.$parts[2].'",'."\n".
@@ -288,7 +308,7 @@ class myGmapsPublic
 							'fillColor: "'.$parts[3].'",'."\n".
 							'fillOpacity: '.$parts[4].''."\n".
 						'});'."\n".
-						'polygon.setMap(map_'.$_ctx->posts->post_id.');'."\n".						
+						'polygon.setMap(map_'.$sPostId.');'."\n".						
 						'google.maps.event.addListener(polygon, "click", function(event) {'."\n".
 							'var pos = event.latLng;'."\n".
 							'openpolyinfowindow(title_'.$maps->post_id.',content_'.$maps->post_id.',pos);'."\n".
@@ -301,7 +321,7 @@ class myGmapsPublic
 						$coordinates = explode("|",$list[0]);
 						
 						
-						echo
+						$sTemplate .= 
 						'var bounds = new google.maps.LatLngBounds('."\n".
 						  'new google.maps.LatLng('.$coordinates[0].', '.$coordinates[1].'),'."\n".
 						  'new google.maps.LatLng('.$coordinates[2].', '.$coordinates[3].'));'."\n".
@@ -313,7 +333,7 @@ class myGmapsPublic
 							'fillOpacity: '.$parts[4].''."\n".
 						'});'."\n".
 						'rectangle.setBounds(bounds);'."\n".
-						'rectangle.setMap(map_'.$_ctx->posts->post_id.');'."\n".						
+						'rectangle.setMap(map_'.$sPostId.');'."\n".						
 						'google.maps.event.addListener(rectangle, "click", function(event) {'."\n".
 							'var pos = event.latLng;'."\n".
 							'openpolyinfowindow(title_'.$maps->post_id.',content_'.$maps->post_id.',pos);'."\n".
@@ -325,7 +345,7 @@ class myGmapsPublic
 						$parts = explode("|",array_pop($list));
 						$coordinates = explode("|",$list[0]);
 						
-						echo
+						$sTemplate .= 
 						
 						'var circle = new google.maps.Circle({'."\n".
 							'center: new google.maps.LatLng('.$coordinates[0].', '.$coordinates[1].'),'."\n".
@@ -336,7 +356,7 @@ class myGmapsPublic
 							'fillColor: "'.$parts[3].'",'."\n".
 							'fillOpacity: '.$parts[4].''."\n".
 						'});'."\n".
-						'circle.setMap(map_'.$_ctx->posts->post_id.');'."\n".						
+						'circle.setMap(map_'.$sPostId.');'."\n".						
 						'google.maps.event.addListener(circle, "click", function(event) {'."\n".
 							'var pos = event.latLng;'."\n".
 							'openpolyinfowindow(title_'.$maps->post_id.',content_'.$maps->post_id.',pos);'."\n".
@@ -346,26 +366,26 @@ class myGmapsPublic
 					} elseif ($type == 'included kml file') {
 						
 						$layer = html::clean($maps->post_excerpt_xhtml);
-						echo
+						$sTemplate .= 
 						'layer = new google.maps.KmlLayer("'.$layer.'", {'."\n".
 							'preserveViewport: true'."\n".
 						'});'."\n".
-						'layer.setMap(map_'.$_ctx->posts->post_id.');'."\n";
+						'layer.setMap(map_'.$sPostId.');'."\n";
 						
 					} elseif ($type == 'GeoRSS feed') {
 						
 						$layer = html::clean($maps->post_excerpt_xhtml);
-						echo
+						$sTemplate .= 
 						'layer = new google.maps.KmlLayer("'.$layer.'", {'."\n".
 							'preserveViewport: true'."\n".
 						'});'."\n".
-						'layer.setMap(map_'.$_ctx->posts->post_id.');'."\n";
+						'layer.setMap(map_'.$sPostId.');'."\n";
 					
 					} elseif ($type == 'directions') {
 						
 						$parts = explode("|",$list[0]);
 						
-						echo						
+						$sTemplate .= 						
 						'var routePolyline;'."\n".
 						'var routePolylineOptions = {'."\n".
 							'strokeColor: \'#555\','."\n".
@@ -397,17 +417,17 @@ class myGmapsPublic
 						  'travelMode: google.maps.TravelMode.DRIVING'."\n".
 						'};'."\n".
 						
-						'$("#map_box_'.$_ctx->posts->post_id.'").addClass( "directions" );'."\n".
+						'$("#map_box_'.$sPostId.'").addClass( "directions" );'."\n".
 						
 						'directionsService.route(request, function(result, status) {'."\n".
 							'if (status == google.maps.DirectionsStatus.OK) {'."\n".
 								'var routePath = result.routes[0].overview_path;'."\n".
 								'routePolyline.setPath(routePath);'."\n".
-								'directionsDisplay.setPanel(document.getElementById(\'panel_'.$_ctx->posts->post_id.'\'));'."\n".
+								'directionsDisplay.setPanel(document.getElementById(\'panel_'.$sPostId.'\'));'."\n".
 								'directionsDisplay.setOptions({options: rendererOptions});'."\n".
 								'directionsDisplay.setDirections(result);'."\n".
-								'directionsDisplay.setMap(map_'.$_ctx->posts->post_id.');'."\n".
-								'routePolyline.setMap(map_'.$_ctx->posts->post_id.');'."\n".								
+								'directionsDisplay.setMap(map_'.$sPostId.');'."\n".
+								'routePolyline.setMap(map_'.$sPostId.');'."\n".								
 							'} else {'."\n".
 								'alert(status);'."\n".
 							'}'."\n".
@@ -422,63 +442,80 @@ class myGmapsPublic
 					
 					} elseif ($type == 'weather') {
 						
-						echo
+						$sTemplate .= 
 						'var weatherLayer = new google.maps.weather.WeatherLayer({'."\n".
 							'temperatureUnits: google.maps.weather.TemperatureUnit.CELSIUS,'."\n".
 							'windSpeedUnits: google.maps.weather.WindSpeedUnit.KILOMETERS_PER_HOUR'."\n".
 						'});'."\n".
-						'weatherLayer.setMap(map_'.$_ctx->posts->post_id.');'."\n";
+						'weatherLayer.setMap(map_'.$sPostId.');'."\n";
 					}
 				}
 			}
 			
 			if ($has_marker) {
-				echo
+				$sTemplate .= 
 					'function openmarkerinfowindow(marker,title,content) {'."\n".
-						'infowindow_'.$_ctx->posts->post_id.'.setContent('."\n".
+						'infowindow_'.$sPostId.'.setContent('."\n".
 							'"<h3>"+title+"</h3>"+'."\n".
-							'"<div class=\"post-infowindow\" id=\"post-infowindow_'.$_ctx->posts->post_id.'\">"+content+"</div>"'."\n".
+							'"<div class=\"post-infowindow\" id=\"post-infowindow_'.$sPostId.'\">"+content+"</div>"'."\n".
 						');'."\n".
-						'infowindow_'.$_ctx->posts->post_id.'.open(map_'.$_ctx->posts->post_id.', marker);'."\n".
-						'$("#post-infowindow_'.$_ctx->posts->post_id.'").parent("div", "div#map_canvas_'.$_ctx->posts->post_id.'").css("overflow","hidden");'."\n".
+						'infowindow_'.$sPostId.'.open(map_'.$sPostId.', marker);'."\n".
+						'$("#post-infowindow_'.$sPostId.'").parent("div", "div#map_canvas_'.$sPostId.'").css("overflow","hidden");'."\n".
 					'}'."\n";
 			}
 			
 			if ($has_poly) {
-				echo
+				$sTemplate .= 
 					'function openpolyinfowindow(title,content,pos) {'."\n".
-						'infowindow_'.$_ctx->posts->post_id.'.setPosition(pos);'."\n".
-						'infowindow_'.$_ctx->posts->post_id.'.setContent('."\n".
+						'infowindow_'.$sPostId.'.setPosition(pos);'."\n".
+						'infowindow_'.$sPostId.'.setContent('."\n".
 							'"<h3>"+title+"</h3>"+'."\n".
-							'"<div class=\"post-infowindow\" id=\"post-infowindow_'.$_ctx->posts->post_id.'\">"+content+"</div>"'."\n".
+							'"<div class=\"post-infowindow\" id=\"post-infowindow_'.$sPostId.'\">"+content+"</div>"'."\n".
 						');'."\n".
-						'infowindow_'.$_ctx->posts->post_id.'.open(map_'.$_ctx->posts->post_id.');'."\n".
-						'$("#post-infowindow_'.$_ctx->posts->post_id.'").parent("div", "div#map_canvas_'.$_ctx->posts->post_id.'").css("overflow","hidden");'."\n".
+						'infowindow_'.$sPostId.'.open(map_'.$sPostId.');'."\n".
+						'$("#post-infowindow_'.$sPostId.'").parent("div", "div#map_canvas_'.$sPostId.'").css("overflow","hidden");'."\n".
 					'}'."\n";
 			}
 			
-			echo	
+			$sTemplate .= 	
 				'});'."\n".
 				"\n//]]>\n".
 				"</script>\n".
 				'<noscript>'."\n".
 				'<p>'.__('Sorry, javascript must be activated in your browser to see this map.').'</p>'."\n".
 				'</noscript>'."\n".
-				'<div id="map_box_'.$_ctx->posts->post_id.'"><div id="map_canvas_'.$_ctx->posts->post_id.'" class="map_canvas"></div><div id="panel_'.$_ctx->posts->post_id.'" class="panel"></div></div>'."\n";
+				'<div id="map_box_'.$sPostId.'"><div id="map_canvas_'.$sPostId.'" class="map_canvas"></div><div id="panel_'.$sPostId.'" class="panel"></div></div>'."\n";
 			
 		}
-	}
-	public static function publicTagMapContent($attr)
-	{
-		$f = $GLOBALS['core']->tpl->getFilters($attr);
 
-		// center="latlng" zoom="x" style="style_name" elements="id,id,id,id" category="id,id,id"
+		if (is_null($_ctx) ) { return $sTemplate; }
+		else { echo $sTemplate; }
+	}
+	public static function publicTagMapContent($attr, $content)
+	{
+		global $core;
+
+		// id="home" center="latlng" zoom="x" style="style_name" elements="id,id,id,id" category="id,id,id"
 		// Récupérer tous les filtres
+		$sId = isset($attr['id']) ? $attr['id'] : substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+		$sCenter = isset($attr['center']) ? addslashes($attr['center']) : '';
+		$iZoom = isset($attr['zoom']) ? (integer) $attr['zoom'] : '12';
+		$sStyle = isset($attr['style']) ? $attr['style'] : '';
+		$aElements = isset($attr['elements']) ? explode(',', $attr['elements']) : array();
+		$aCategories = isset($attr['category']) ? explode(',', $attr['category']) : array();
+
 		// Récupérer tous les éléments de cartes à afficher
 		// Retourner le code JS pour afficher la carte sous forme de PHP (pour ne pas le mettre en cache)
- 
-		return
-		'<?php echo '.sprintf($f,'$GLOBALS["core"]->getVersion()').'; ?>';
+		//$sTemplate = '';
+
+ 		return self::publicMapContent($core, null, array(
+ 			'id' => $sId,
+ 			'center' => $sCenter,
+ 			'zoom' => $iZoom,
+ 			'style' => $sStyle,
+ 			'map_elements' => $aElements,
+ 			'map_element_category' => $aCategories
+ 		));
 	}
 }
 
