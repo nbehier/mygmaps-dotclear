@@ -1,0 +1,138 @@
+<html>
+<head>
+  <title>Managing map elements</title>
+</head>
+
+<body>
+<h4>Presentation</h4>
+
+<dl>
+  <dt>Insert Gmap maps in your entries.</dt>
+  <dd>This plugin allows you to create and edit map elements. These elements will be used to insert maps in your posts.</dd>
+  <dd>To insert a map in a post, you must create first the elements that will be included in it.</dd>
+</dl>
+<h4>Settings</h4>
+
+<dl>
+  <dt>Activation</dt>
+  <dd>Plugin must be activated to work on the blog. Desactivation does not delete maps or maps elements, but merely stops their display.</dd>
+</dl>
+
+<dl>
+  <dt>Default options for maps</dt>
+  <dd>Click on the marker and drag or search for an address to set default map center. Zoom and map style will also be saved. 
+  These options will be used when creating a new map.</dd>
+</dl>
+
+<h4>Maps styles</h4>
+<p>You may style your maps by adding configuration files from your media manager.</p>
+<dl>
+  <dt>Styles path</dt>
+  <dd>
+  <ul>
+    <li>to add styles, creaye a folder named <em>myGmaps</em> in your media manager</li>
+    <li>in this folder, create another folder named <em>styles</em></li>
+    <li>keep in this folder your personal styles</li>
+  </ul>
+  </dd>
+</dl>
+
+<dl>  
+  <dt>Name and content of style files</dt>
+  <dd>
+  <ul>
+    <li>file name must use the following pattern : <em>my_style_styles.js</em> where <em>my_style</em> is the name you can change (it is only an identifier and will not be displayed on public maps).</li>
+	<li>file content must be a JSON array of this type : <pre>[{featureType: '',elementType: '',stylers: [{hue: ''},{saturation: ''},{lightness: ''},// etc...]},{featureType: '',// etc...}]</pre></li>
+    </ul>
+	<p>You may get lots of styles from <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
+	</dd>
+</dl>
+
+<h4>Map element types</h4>
+
+<p><em>All elements are editable, see help in element editing page.</p>
+<dl>
+  
+  <dt>Point of interest</dt>
+  <dd>Only one marker is on the map. It will be displayed with a <em>title</em> attribute containing element title. On the public side, a click on the marker will display this element's content in the infowindow. On this page, a clic allows to change the element icon.</dd>
+  
+  <dt>Polyline</dt>
+  <dd>Several markers are on the map to form a polyline. The polyline will be displayed on the map. On the public side, a click on the line will display this element's content in the infowindow. On this page, a clic allows to change the element diplay options.</dd>
+  
+  <dt>Polygon</dt>
+  <dd>Several markers are on the map to form a polygon. The polygon will be displayed on the map. On the public side, a click on the polygon will display this element's content in the infowindow. On this page, a clic allows to change the element diplay options.</dd>
+  
+  <dt>Rectangle</dt>
+  <dd>A rectangle is displayed on the map. On the public side, a click on the rectangle will display this element's content in the infowindow. On this page, a clic allows to change the element diplay options.</dd>
+  
+  <dt>Circle</dt>
+  <dd>A circle is displayed on the map. On the public side, a click on the circle will display this element's content in the infowindow. On this page, a clic allows to change the element diplay options.</dd>
+
+  <dt>Included kml file</dt>
+  <dd>Map displays objects from a kml file. They are not editable. <em>This type of element cannot have a description.</em></dd>
+  
+  <dt>GeoRSS feed</dt>
+  <dd>Map displays objects from a GeoRSS feed. They are not editable. <em>This type of element cannot have a description.</em></dd>
+  
+  <dt>Directions</dt>
+  <dd>Map displays a route between two points, and a side panel with driving directions. <em>You may use only one directions element on the same map.</em></dd>
+  
+  <dt>Weather</dt>
+  <dd>A weather forecast layer is added to the map. <em>This type of element cannot have a description. You may use only one weather element on the same map.</em></dd>
+  
+</dl>
+
+
+<h4>Filters for the map elements list</h4>
+
+<dl>
+  <dt>Author</dt>
+  <dd>Allows you to filter by author.</dd>
+  
+  <dt>Category</dt>
+  <dd>Filter by category.</dd>
+  
+  <dt>Status</dt>
+  <dd>
+  		<ul>
+		<li><strong>Pending</strong>: elements whose publication status has not yet been decided.</li>
+		 <li><strong>Scheduled</strong>: elements will be online at day and hour specified in the field <em>Published on</em>.</li>
+		<li><strong>Offline</strong>: elements are offline.</li>
+		<li><strong>Published</strong>: element are online.</li>
+		</ul>
+  </dd>
+  
+  <dt>Month</dt>
+  <dd>Filter on a specific month and year.</dd>
+  
+  <dt>Map element type</dt>
+  <dd>Filter on the different map elements types.</dd>
+  
+  <dt>Order by</dt>
+  <dd>Defines the list order, either on the date, the title, the author,
+  or the status.</dd>
+  
+  <dt>Sort</dt>
+  <dd>Choose whether the list will be sorted in ascending or descending order.</dd>
+  
+  <dt>Map elements per page</dt>
+  <dd>Number of map elements that will be displayed on each page of the resulting
+  set.</dd>
+</dl>
+
+<h4>Selected map elements actions</h4>
+<p>If your user permission level allows it, you can perform batch operations on the
+map elements you select in the list.</p>
+
+<ul>
+  <li><strong>Publish</strong>: set the map elements online.</li>
+  <li><strong>Mark as pending</strong>: erase other publication status.</li>
+  <li><strong>Change category</strong>: directs you to the category list to choose a
+  new one for the map elements.</li>
+  <li><strong>Change author</strong>: allows you to change the map elements' author by
+  entering the new author's ID.</li>
+  <li><strong>Delete</strong>: suppress the map elements (this operation cannot be undone).</li>
+</ul>
+
+</body>
+</html>
