@@ -14,6 +14,8 @@ $core->addBehavior('publicEntryAfterContent',array('myGmapsPublic','publicMapCon
 $core->addBehavior('publicPageAfterContent',array('myGmapsPublic','publicMapContent'));
 $core->addBehavior('publicHeadContent',array('myGmapsPublic','publicHeadContent'));
 
+$core->tpl->addValue('myGmaps',array('myGmapsPublic','publicTagMapContent'));
+
 class myGmapsPublic
 {
 	public static function hasMap ($post_id)
@@ -465,6 +467,18 @@ class myGmapsPublic
 				'<div id="map_box_'.$_ctx->posts->post_id.'"><div id="map_canvas_'.$_ctx->posts->post_id.'" class="map_canvas"></div><div id="panel_'.$_ctx->posts->post_id.'" class="panel"></div></div>'."\n";
 			
 		}
+	}
+	public static function publicTagMapContent($attr)
+	{
+		$f = $GLOBALS['core']->tpl->getFilters($attr);
+
+		// center="latlng" zoom="x" style="style_name" elements="id,id,id,id" category="id,id,id"
+		// Récupérer tous les filtres
+		// Récupérer tous les éléments de cartes à afficher
+		// Retourner le code JS pour afficher la carte sous forme de PHP (pour ne pas le mettre en cache)
+ 
+		return
+		'<?php echo '.sprintf($f,'$GLOBALS["core"]->getVersion()').'; ?>';
 	}
 }
 
