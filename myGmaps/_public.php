@@ -65,6 +65,7 @@ class myGmapsPublic
 
 		// Récupérer tous les éléments de cartes selon des catégories
 		if (array_key_exists('categories', $aParams) && ! empty($aParams['categories']) ) {
+			$my_params['post_id'] = '';
 			$my_params['cat_id'] = $aParams['categories'];
 			$rs2 = $core->blog->getPosts($my_params);
 			while ($rs2->fetch() ) { // Evite les doublons
