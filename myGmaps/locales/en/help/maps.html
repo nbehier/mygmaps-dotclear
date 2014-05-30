@@ -134,5 +134,24 @@ map elements you select in the list.</p>
   <li><strong>Delete</strong>: suppress the map elements (this operation cannot be undone).</li>
 </ul>
 
+
+<h4>Display map in a template</h4>
+<p>You can display a map in your templates. Use the following code: <pre>{{tpl:myGmaps id="home" center="47.389982,0.688877" zoom="12" style="roadmap" elements="2,4" category="Towns"}}</pre></p>
+
+<dl>
+  <dt>id</dt>
+  <dd>Specify a unique id. If none specified, an id will be generated for each view.</dd>
+  <dt>center</dt>
+  <dd>Indicate the geographical center of your map (Ex: Tours, France - Latitude : 47.389982, Longitude : 0.688877)</dd>
+  <dt>zoom</dt>
+  <dd>Between 0 and 19 (0 to see the world)</dd>
+  <dt>style</dt>
+  <dd>Choice: roadmap, satellite, hybrid, terrain, OpenStreetMap et neutral_blue. You may call your own style (see above)</dd>
+  <dt>elements</dt>
+  <dd>Map elements ids, separated by commas</dd>
+  <dt>category</dt>
+  <dd>Standardized names of categories, separated by commas</dd>
+</dl>
+
 </body>
 </html>
