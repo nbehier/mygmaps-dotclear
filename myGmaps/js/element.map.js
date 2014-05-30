@@ -598,7 +598,7 @@ $(function () {
 		var custom_icons = myIcons.join();
 		custom_icons = custom_icons.replace(/\,/g, '');
 		
-		var default_icons_url = $("#blog_url").attr('value');
+		var default_icons_url = $("#plugin_QmarkURL").attr('value');
 		
 		var infowindowIcons =
 		'<div id="infowindow_icons" style="cursor: pointer">' +
@@ -608,14 +608,14 @@ $(function () {
 		'</div>' +
 		'<hr />' +
 		'<h4>' + default_icons_msg + '</h4>' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-blue.png" alt="marker-blue.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-green.png" alt="marker-green.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-grey.png" alt="marker-grey.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-orange.png" alt="marker-orange.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-purple.png" alt="marker-purple.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-white.png" alt="marker-white.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker-yellow.png" alt="marker-yellow.png"  />' +
-		'<img src="' + default_icons_url +'index.php?pf=myGmaps/icons/marker.png" alt="marker.png"  />&nbsp;' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-blue.png" alt="marker-blue.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-green.png" alt="marker-green.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-grey.png" alt="marker-grey.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-orange.png" alt="marker-orange.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-purple.png" alt="marker-purple.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-white.png" alt="marker-white.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-yellow.png" alt="marker-yellow.png"  />' +
+		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker.png" alt="marker.png"  />&nbsp;' +
 		'</div>';
 				
 		// Infowindows actions
@@ -1025,7 +1025,7 @@ $(function () {
 			
 			marker = new google.maps.Marker({
 				position: location,
-				icon : default_icons_url + 'index.php?pf=myGmaps/icons/marker.png',
+				icon : default_icons_url + 'pf=myGmaps/icons/marker.png',
 				draggable: true,
 				map: map
 			});

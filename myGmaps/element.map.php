@@ -17,6 +17,8 @@ dcPage::check('usage,contentadmin');
 $p_url	= 'plugin.php?p='.basename(dirname(__FILE__));
 $s =& $core->blog->settings->myGmaps;
 
+$plugin_QmarkURL = $core->blog->getQmarkURL();
+
 $myGmaps_center = $s->myGmaps_center;
 $myGmaps_zoom = $s->myGmaps_zoom;
 $myGmaps_type = $s->myGmaps_type;
@@ -673,6 +675,7 @@ if ($can_edit_post)
 			form::textarea('post_notes',50,5,html::escapeHTML($post_notes)).
 			'</p>'.
 			'<p><input type="text" class="hidden" id="blog_url" value="'.$blog_url.'" />'.
+			'<input type="text" class="hidden" id="plugin_QmarkURL" value="'.$plugin_QmarkURL.'" />'.
 			'<input type="text" class="hidden" id="icons_list" value="'.$icons_list.'" />'.
 			'<input type="text" class="hidden" id="icons_base_url" value="'.$icons_base_url.'" />'.
 			'<input type="text" class="hidden" id="kmls_list" value="'.$kmls_list.'" />'.
