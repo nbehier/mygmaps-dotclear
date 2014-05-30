@@ -158,8 +158,7 @@ class myGmapsPublic
 				$aOptions = array(
 					'center' => $post_map_options[0].','.$post_map_options[1],
 					'zoom' => $post_map_options[2],
-					'style' => $post_map_options[3],
-					'map_elements' => $aElements
+					'style' => $post_map_options[3]
 				);
 			}
 			
