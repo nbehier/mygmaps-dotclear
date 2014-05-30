@@ -3,7 +3,7 @@
 #
 # This file is part of myGmaps, a plugin for Dotclear 2.
 #
-# Copyright (c) 2014 Philippe aka amalgame
+# Copyright (c) 2014 Philippe aka amalgame and contributors
 # Licensed under the GPL version 2.0 license.
 # See LICENSE file or
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -159,8 +159,7 @@ class myGmapsPublic
 					'center' => $post_map_options[0].','.$post_map_options[1],
 					'zoom' => $post_map_options[2],
 					'style' => $post_map_options[3],
-					'map_elements' => $aElements,
-					'map_element_category' => $aCategories
+					'map_elements' => $aElements
 				);
 			}
 			
