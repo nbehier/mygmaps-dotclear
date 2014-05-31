@@ -1088,12 +1088,11 @@ $(function () {
 		function addRectangle(location) {
 		
 			// Initialize
+			var scale = Math.pow(2,map.getZoom());
 			
-			var radius = 0.02;
-			var c = Math.cos(location.lat()* Math.PI / 180);
 			rectangle.setBounds(new google.maps.LatLngBounds(
-				new google.maps.LatLng(location.lat()-c*radius/2, location.lng()-radius/2),
-				new google.maps.LatLng(location.lat()+c*radius/2, location.lng()+radius/2)));
+				new google.maps.LatLng(((location.lat()* scale) - 50)/ scale, ((location.lng()* scale) - 75)/ scale),
+				new google.maps.LatLng(((location.lat()* scale) + 50)/ scale, ((location.lng()* scale) + 75)/ scale)));
 			
 			rectangle.setMap(map);
 			
@@ -1109,8 +1108,10 @@ $(function () {
 		
 			// Initialize
 			
+			var scale = Math.pow(2,31 - map.getZoom());
+			var radius = scale / 500;
 			circle.setOptions({
-				radius: 1000,
+				radius: radius,
 				center: location
 			});
 			circle.setMap(map);
