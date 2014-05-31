@@ -1108,7 +1108,7 @@ $(function () {
 		
 			// Initialize
 			
-			var scale = Math.pow(2,31 - map.getZoom());
+			var scale = Math.pow( 2,( Math.PI * 10 ) - map.getZoom() );
 			var radius = scale / 500;
 			circle.setOptions({
 				radius: radius,
