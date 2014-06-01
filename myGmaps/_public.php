@@ -511,6 +511,14 @@ class myGmapsPublic
 				'}'."\n";
 			}
 
+			$sMapContainerStyles = '';
+			$sMapCanvasStyles = '';
+			if ($isTemplateTag ) {
+				$sMapContainerStyles .= ( $aOptions['width'] != '' ? 'width:'.$aOptions['width'].';' : '');
+				$sMapContainerStyles .= ( $aOptions['height'] != '' ? 'height:'.$aOptions['height'].';' : '');
+				$sMapCanvasStyles .= ( $aOptions['height'] != '' ? 'min-height:'.$aOptions['height'].';' : '');
+			}
+
 			$sTemplate .= 	
 			'});'."\n".
 			"\n//]]>\n".
@@ -518,7 +526,7 @@ class myGmapsPublic
 			'<noscript>'."\n".
 				'<p>'.__('Sorry, javascript must be activated in your browser to see this map.').'</p>'."\n".
 			'</noscript>'."\n".
-			'<div id="map_box_'.$sPostId.'"><div id="map_canvas_'.$sPostId.'" class="map_canvas"></div><div id="panel_'.$sPostId.'" class="panel"></div></div>'."\n";
+			'<div id="map_box_'.$sPostId.'" style="'.$sMapContainerStyles.'"><div id="map_canvas_'.$sPostId.'" class="map_canvas" style="'.$sMapCanvasStyles.'"></div><div id="panel_'.$sPostId.'" class="panel"></div></div>'."\n";
 		}
 
 		if ($isTemplateTag ) { return $sTemplate; }
@@ -535,6 +543,8 @@ class myGmapsPublic
 		$sCenter = isset($attr['center']) ? addslashes($attr['center']) : '';
 		$iZoom = isset($attr['zoom']) ? (integer) $attr['zoom'] : '12';
 		$sStyle = isset($attr['style']) ? $attr['style'] : '';
+		$sWidth = isset($attr['width']) ? $attr['width'] : '';
+		$sHeight = isset($attr['height']) ? $attr['height'] : '';
 		$aElements = (isset($attr['elements']) && !empty($attr['elements']) ) ? explode(',', $attr['elements']) : array();
 		$aCategories = (isset($attr['category']) && !empty($attr['category']) ) ? explode(',', $attr['category']) : array();
 
@@ -543,6 +553,8 @@ class myGmapsPublic
 			'center' => $sCenter,
 			'zoom' => $iZoom,
 			'style' => $sStyle,
+			'width' => $sWidth,
+			'height' => $sHeight,
 			'map_elements' => $aElements,
 			'map_element_category' => $aCategories
 		));
