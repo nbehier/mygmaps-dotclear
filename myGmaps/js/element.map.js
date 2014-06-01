@@ -507,13 +507,19 @@ $(function () {
 			var custom_kmls = myKmls.join();
 			custom_kmls = '<ul>' + custom_kmls.replace(/\,/g, '') + '</ul>';
 			
+			if (custom_kmls != '') {
+				var has_custom_kmls = '<h4>' + custom_kmls_msg + '</h4>' +
+				'<div style="max-height: 100px;overflow: auto">' +
+				custom_kmls +
+				'</div>' +
+				'<hr />';
+			} else {
+				var has_custom_kmls = '';
+			}
+			
 			var infowindowKml =
 			'<div id="infowindow_kml" style="cursor: pointer">' +
-			'<h4>' + custom_kmls_msg + '</h4>' +
-			'<div style="max-height: 100px;overflow: auto">' +
-			custom_kmls +
-			'</div>' +
-			'<hr />' +
+			has_custom_kmls +
 			'<h4>' + kml_url_msg + '</h4>' +
 			'<p><input type="text" id="kml_url" size="80" value="' + $('#post_excerpt').attr('value') +'" /></p>' +
 			'<p><input type="button" id="save" value="OK" /></p>' +
@@ -600,14 +606,20 @@ $(function () {
 		
 		var default_icons_url = $("#plugin_QmarkURL").attr('value');
 		
+		if (custom_icons != '') {
+			var has_custom_icons = '<h4>' + custom_icons_msg + '</h4>' +
+			'<div id="custom_icons_list">' +
+			custom_icons +
+			'</div>' +
+			'<hr />';
+		} else {
+			var has_custom_icons = '';
+		}
+		
 		var infowindowIcons =
 		'<div id="infowindow_icons" style="cursor: pointer">' +
-		'<h4>' + custom_icons_msg + '</h4>' +
-		'<div id="custom_icons_list">' +
-		custom_icons +
-		'</div>' +
-		'<hr />' +
-		'<h4>' + default_icons_msg + '</h4>' +
+		has_custom_icons + 
+		'<h4>' + default_icons_msg + '</h4>' + 
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-blue.png" alt="marker-blue.png"  />' +
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-green.png" alt="marker-green.png"  />' +
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-grey.png" alt="marker-grey.png"  />' +
@@ -1139,13 +1151,19 @@ $(function () {
 			var custom_kmls = myKmls.join();
 			custom_kmls = '<ul>' + custom_kmls.replace(/\,/g, '') + '</ul>';
 			
+			if (myKmls != '') {
+				var has_custom_kmls = '<h4>' + custom_kmls_msg + '</h4>' +
+				'<div style="max-height: 100px;overflow: auto">' +
+				custom_kmls +
+				'</div>' +
+				'<hr />';
+			} else {
+				var has_custom_kmls = '';
+			}
+			
 			var infowindowKml =
 			'<div id="infowindow_kml" style="cursor: pointer">' +
-			'<h4>' + custom_kmls_msg + '</h4>' +
-			'<div style="max-height: 100px;overflow: auto">' +
-			custom_kmls +
-			'</div>' +
-			'<hr />' +
+			has_custom_kmls +
 			'<h4>' + kml_url_msg + '</h4>' +
 			'<p><input type="text" id="kml_url" size="80" value="' + $('#post_excerpt').attr('value') +'" /></p>' +
 			'<p><input type="button" id="save" value="OK" /></p>' +

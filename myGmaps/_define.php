@@ -16,7 +16,7 @@ $this->registerModule(
 	/* Name */				"myGmaps",
 	/* Description*/		"Create custom maps associated to your posts",
 	/* Author */			"Philippe aka amalgame",
-	/* Version */			'4.6',
+	/* Version */			'4.6.1',
 	/* Permissions */		array(
 								'permissions' =>	'usage,contentadmin',
 								'type' => 'plugin',

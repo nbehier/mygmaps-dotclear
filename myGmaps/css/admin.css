@@ -7,6 +7,9 @@
 #gmap-area, #options-box,.s-tags,.s-attachments {
 	display:none
 	}
+#infowindow_icons {
+	min-width: 200px
+	}
 #infowindow_icons  #custom_icons_list {
 	max-height: 100px;
 	overflow: auto;
