@@ -507,7 +507,7 @@ $(function () {
 			var custom_kmls = myKmls.join();
 			custom_kmls = '<ul>' + custom_kmls.replace(/\,/g, '') + '</ul>';
 			
-			if (custom_kmls != '') {
+			if (myKmls != '') {
 				var has_custom_kmls = '<h4>' + custom_kmls_msg + '</h4>' +
 				'<div style="max-height: 100px;overflow: auto">' +
 				custom_kmls +
