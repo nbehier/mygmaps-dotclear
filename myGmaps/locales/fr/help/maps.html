@@ -128,7 +128,7 @@
 seul coup. Les actions possibles, comme pour les billets, dépendent des permissions de l'utilisateur.</p>
 
 <h4>Afficher une carte dans un template</h4>
-<p>Il est possible d'afficher une carte au sein de vos templates. Utilisez le code : <pre>{{tpl:myGmaps id="home" center="47.389982,0.688877" zoom="12" style="roadmap" elements="2,4" category="4"}}</pre></p>
+<p>Il est possible d'afficher une carte au sein de vos templates. Utilisez le code : <pre>{{tpl:myGmaps id="home" center="47.389982,0.688877" zoom="12" style="roadmap" width="80%" height="200px" elements="2,4" category="4"}}</pre></p>
 
 <dl>
   <dt>id</dt>
@@ -139,6 +139,8 @@ seul coup. Les actions possibles, comme pour les billets, dépendent des permiss
   <dd>Entre 0 et 19 (à 0 on voit le monde entier)</dd>
   <dt>style</dt>
   <dd>Choix entre roadmap, satellite, hybrid, terrain, OpenStreetMap et neutral_blue. Vous pouvez aussi appeler votre propre style (Voir plus haut)</dd>
+  <dt>width, height</dt>
+  <dd>largeur ou hauteur spécifiques, en unité CSS (px, em, %, etc.)</dd>
   <dt>elements</dt>
   <dd>Les identifiants des éléments de cartes particuliers, séparés par des virgules</dd>
   <dt>category</dt>
