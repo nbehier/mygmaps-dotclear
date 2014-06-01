@@ -29,7 +29,6 @@ $(function () {
 						$(this).removeClass( "active" );
 					});
 					$(this).addClass( "active" );
-					
 				}
 			}
 		});
@@ -302,9 +301,13 @@ $(function () {
 			infowindow.close();
 			
 			var action = 'none';
+			var hasButtonActive = ( $(".map_toolbar button.active").length > 0 ? true : false);
 			$(".map_toolbar button").each(function () {
 				if ($(this).hasClass( "active" )) {
 					action = ($(this).attr('id'));
+				}
+				else if (hasButtonActive) {
+					$(this).addClass( "inactive" );
 				}
 			});
 			
@@ -1226,6 +1229,7 @@ $(function () {
 			
 			$(".map_toolbar button").each(function () {
 				$(this).removeClass( "active" );
+				$(this).removeClass( "inactive" );
 			});
 			$("#delete_map").blur();
 			

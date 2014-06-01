@@ -336,4 +336,14 @@ $GLOBALS['__l10n']['Default map parameters'] = 'Paramètres des cartes par défa
 
 $GLOBALS['__l10n']['Radius'] = 'Rayon';
 
+$GLOBALS['__l10n']['Choose your tool'] = 'Sélectionnez votre outil';
+
+$GLOBALS['__l10n']['Click on map'] = 'Cliquez sur la carte';
+
+$GLOBALS['__l10n']['Enhance render and parameters'] = 'Améliorez le rendu et les différents réglages';
+
+$GLOBALS['__l10n']['Save your map element'] = 'Enregistrez votre élément de carte';
+
+$GLOBALS['__l10n']['Create a new one'] = 'Créez-en un nouveau';
+
 ?>

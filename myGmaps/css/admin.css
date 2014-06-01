@@ -66,6 +66,10 @@
 	border-color : #ddd;
 	background-color: #fff;
 	}
+.map_toolbar button.inactive:hover, .map_toolbar button.inactive:focus {
+	border-color : #e5e5e5 #ccc #ccc #e5e5e5;
+	background-color: #f7f7f7;
+	}
 .map_toolbar button span {
 	display: none;
 	}
@@ -80,7 +84,8 @@ span.map_spacer {
 	vertical-align: top;margin: 0.05em 0 0 0;height: 2.35em
 	}
 
-button.add_marker {
+button.add_marker,
+button.add_marker.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/marker-bw.png);
 	}
 button.add_marker:hover, button.add_marker.active {
@@ -88,7 +93,8 @@ button.add_marker:hover, button.add_marker.active {
 	background-color: #fff
 	}
 	
-button.add_polyline {
+button.add_polyline,
+button.add_polyline.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/polyline-bw.png);
 	}
 button.add_polyline:hover, button.add_polyline.active {
@@ -96,7 +102,8 @@ button.add_polyline:hover, button.add_polyline.active {
 	background-color: #fff
 	}
 	
-button.add_polygon {
+button.add_polygon,
+button.add_polygon.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/polygon-bw.png);
 	}
 button.add_polygon:hover, button.add_polygon.active {
@@ -104,7 +111,8 @@ button.add_polygon:hover, button.add_polygon.active {
 	background-color: #fff
 	}
 	
-button.add_rectangle {
+button.add_rectangle,
+button.add_rectangle.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/rectangle-bw.png);
 	}
 button.add_rectangle:hover, button.add_rectangle.active {
@@ -112,7 +120,8 @@ button.add_rectangle:hover, button.add_rectangle.active {
 	background-color: #fff
 	}
 	
-button.add_circle {
+button.add_circle,
+button.add_circle.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/circle-bw.png);
 	}
 button.add_circle:hover, button.add_circle.active {
@@ -120,7 +129,8 @@ button.add_circle:hover, button.add_circle.active {
 	background-color: #fff
 	}
 	
-button.add_kml {
+button.add_kml,
+button.add_kml.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/kml-bw.png);
 	}
 button.add_kml:hover, button.add_kml.active {
@@ -128,7 +138,8 @@ button.add_kml:hover, button.add_kml.active {
 	background-color: #fff
 	}
 	
-button.add_georss {
+button.add_georss,
+button.add_georss.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/feed-bw.png);
 	}
 button.add_georss:hover, button.add_georss.active {
@@ -136,7 +147,8 @@ button.add_georss:hover, button.add_georss.active {
 	background-color: #fff
 	}
 
-button.add_directions {
+button.add_directions,
+button.add_directions.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/directions-bw.png);
 	}
 button.add_directions:hover, button.add_directions.active {
@@ -144,7 +156,8 @@ button.add_directions:hover, button.add_directions.active {
 	background-color: #fff
 	}
 	
-button.add_weather {
+button.add_weather,
+button.add_weather.inactive:hover {
 	background-image: url(index.php?pf=myGmaps/css/img/weather-bw.png);
 	}
 button.add_weather:hover, button.add_weather.active {

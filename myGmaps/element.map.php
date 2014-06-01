@@ -661,7 +661,12 @@ if ($can_edit_post)
 			'<button id="delete_map" type="button" class="delete_map" title="'.__('Initialize map').'"><span>'.__('Initialize map').'</span></button>'.
 			'</div>'.
 			'<div id="map_box"><div class="area" id="map_canvas"></div><div id="panel"></div></div>'.
-			'<p class="form-note info maximal mapinfo" style="width: 100%">'.__('This map will not be displayed on the blog. It is here only for positioning your element.').'</p>',
+			'<div class="form-note info maximal mapinfo" style="width: 100%"><p>'.__('This map will not be displayed on the blog. It is here only for positioning your element.').'</p>'.
+			'<ol><li>' . __('Choose your tool') . '</li>',
+			'<li>' . __('Click on map') . '</li>',
+			'<li>' . __('Enhance render and parameters') . '</li>',
+			'<li>' . __('Save your map element') . '</li>',
+			'<li><a href="plugin.php?p=myGmaps&ampdo=edit">' . __('Create a new one') . '</a></li></ol></div>',
 
 		"post_content" =>
 			'<p class="area" id="content-area"><label class="bold" '.
