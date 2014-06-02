@@ -484,6 +484,7 @@ if ($post_id) {
 		'var custom_kmls_msg = \''.__('Custom Kml files').'\';'."\n".
 		'var directions_start_msg = \''.__('Start:').'\';'."\n".
 		'var directions_end_msg = \''.__('End:').'\';'."\n".
+		'var directions_show_msg = \''.__('Display directions panel in public map').'\';'."\n".
 		'//]]>'."\n".
 	'</script>';
 	
@@ -661,7 +662,8 @@ if ($can_edit_post)
 			'<button id="delete_map" type="button" class="delete_map" title="'.__('Initialize map').'"><span>'.__('Initialize map').'</span></button>'.
 			'</div>'.
 			'<div id="map_box"><div class="area" id="map_canvas"></div><div id="panel"></div></div>'.
-			'<p class="form-note info maximal mapinfo" style="width: 100%">'.__('This map will not be displayed on the blog. It is here only for positioning your element.').'</p>',
+			'<div class="form-note info maximal mapinfo" style="width: 100%"><p>'.__('This map will not be displayed on the blog and is meant only to create, edit and position only one element at a time. Choose a tool and click on the map to create your element, then click on the element to edit its properties.').'</p>'.
+			'</div>',
 
 		"post_content" =>
 			'<p class="area" id="content-area"><label class="bold" '.

@@ -464,7 +464,7 @@ EOT;
         self::checkOptions(
             get_called_class(), 
             array_keys($aOptions), 
-            array('map_id', 'element_id', 'stroke_color', 'stroke_opacity', 'stroke_weight', 'origin', 'destination')
+            array('map_id', 'element_id', 'stroke_color', 'stroke_opacity', 'stroke_weight', 'origin', 'destination', 'display_direction')
         );
         $sMapId = $aOptions['map_id'];
         $sId = $aOptions['element_id'];
@@ -473,6 +473,7 @@ EOT;
         $sStrokeWeight = $aOptions['stroke_weight'];
         $sOrigin = $aOptions['origin'];
         $sDestination = $aOptions['destination'];
+        $bDisplayDirection = $aOptions['display_direction'];
 
         $sOutput = <<<EOT
 var routePolyline;
@@ -499,6 +500,15 @@ var request = {
     destination: "{$sDestination}",
     travelMode: google.maps.TravelMode.DRIVING
 };
+EOT;
+        if ($bDisplayDirection) {
+            $sOutput .= '$("#map_box_'.$sMapId.'").addClass( "directions" );'."\n";
+        }
+        else {
+            $sTemplate .= '$("#map_box_'.$sMapId.'").addClass( "no-directions" );'."\n";
+        }
+
+        $sOutput .= <<<EOT
 $("#map_box_{$sMapId}").addClass("directions");
 directionsService.route(request, function(result, status) {
     if (status == google.maps.DirectionsStatus.OK) {

@@ -15,8 +15,8 @@ if (!defined('DC_RC_PATH')) { return; }
 $this->registerModule(
 	/* Name */				"myGmaps",
 	/* Description*/		"Create custom maps associated to your posts",
-	/* Author */			"Philippe aka amalgame",
-	/* Version */			'4.6',
+	/* Author */			"Philippe aka amalgame and contributors",
+	/* Version */			'4.7',
 	/* Permissions */		array(
 								'permissions' =>	'usage,contentadmin',
 								'type' => 'plugin',

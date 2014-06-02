@@ -29,7 +29,6 @@ $(function () {
 						$(this).removeClass( "active" );
 					});
 					$(this).addClass( "active" );
-					
 				}
 			}
 		});
@@ -302,9 +301,13 @@ $(function () {
 			infowindow.close();
 			
 			var action = 'none';
+			var hasButtonActive = ( $(".map_toolbar button.active").length > 0 ? true : false);
 			$(".map_toolbar button").each(function () {
 				if ($(this).hasClass( "active" )) {
 					action = ($(this).attr('id'));
+				}
+				else if (hasButtonActive) {
+					$(this).addClass( "inactive" );
 				}
 			});
 			
@@ -507,13 +510,19 @@ $(function () {
 			var custom_kmls = myKmls.join();
 			custom_kmls = '<ul>' + custom_kmls.replace(/\,/g, '') + '</ul>';
 			
+			if (myKmls != '') {
+				var has_custom_kmls = '<h4>' + custom_kmls_msg + '</h4>' +
+				'<div style="max-height: 100px;overflow: auto">' +
+				custom_kmls +
+				'</div>' +
+				'<hr />';
+			} else {
+				var has_custom_kmls = '';
+			}
+			
 			var infowindowKml =
 			'<div id="infowindow_kml" style="cursor: pointer">' +
-			'<h4>' + custom_kmls_msg + '</h4>' +
-			'<div style="max-height: 100px;overflow: auto">' +
-			custom_kmls +
-			'</div>' +
-			'<hr />' +
+			has_custom_kmls +
 			'<h4>' + kml_url_msg + '</h4>' +
 			'<p><input type="text" id="kml_url" size="80" value="' + $('#post_excerpt').attr('value') +'" /></p>' +
 			'<p><input type="button" id="save" value="OK" /></p>' +
@@ -549,6 +558,13 @@ $(function () {
 			var weight = parts[2];
 			var opacity = parts[3];
 			var color = parts[4];
+			var show = parts[5];
+			
+			if (show == 'true') {
+				var state = 'checked = "checked"';
+			} else {
+				var state = '';
+			}
 			
 			var infowindowDirections =
 			'<div id="infowindow_directions" style="cursor: pointer">' +
@@ -556,6 +572,7 @@ $(function () {
 			'<div class="col70">' +
 			'<p><label for="directions_start">' + directions_start_msg + '</label><input type="text" id="directions_start" size="40" value="' + start + '" /></p>' +
 			'<p><label for="directions_end">' + directions_end_msg + '</label><input type="text" id="directions_end" size="40" value="' + end + '" /></p>' +
+			'<p><label for="directions_show"><input type="checkbox" id="directions_show" ' + state + ' />' + directions_show_msg + '</label></p>' +
 			'</div>' +
 			'<div class="col30">' +
 			'<p><label for="stroke_color">' + stroke_color_msg + '</label><input type="text" id="stroke_color" size="10" class="colorpicker" value="' + color +'" />' +
@@ -600,14 +617,20 @@ $(function () {
 		
 		var default_icons_url = $("#plugin_QmarkURL").attr('value');
 		
+		if (custom_icons != '') {
+			var has_custom_icons = '<h4>' + custom_icons_msg + '</h4>' +
+			'<div id="custom_icons_list">' +
+			custom_icons +
+			'</div>' +
+			'<hr />';
+		} else {
+			var has_custom_icons = '';
+		}
+		
 		var infowindowIcons =
 		'<div id="infowindow_icons" style="cursor: pointer">' +
-		'<h4>' + custom_icons_msg + '</h4>' +
-		'<div id="custom_icons_list">' +
-		custom_icons +
-		'</div>' +
-		'<hr />' +
-		'<h4>' + default_icons_msg + '</h4>' +
+		has_custom_icons + 
+		'<h4>' + default_icons_msg + '</h4>' + 
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-blue.png" alt="marker-blue.png"  />' +
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-green.png" alt="marker-green.png"  />' +
 		'<img src="' + default_icons_url +'pf=myGmaps/icons/marker-grey.png" alt="marker-grey.png"  />' +
@@ -735,6 +758,7 @@ $(function () {
 			
 			var start = $('#directions_start').attr('value');
 			var end = $('#directions_end').attr('value');
+			var show = $('#directions_show').prop('checked');
 			var color = $('#stroke_color').attr('value');
 			var opacity = $('#stroke_opacity').attr('value');
 			var weight = $('#stroke_weight').attr('value');
@@ -768,7 +792,7 @@ $(function () {
 			// Save values and type
 			
 			element_values = start + "|" + end + "|" + weight +
-				"|" + opacity + "|" + color;
+				"|" + opacity + "|" + color + "|" + show;
 			
 			$('#element_type').val('directions');
 			$('#post_excerpt').val(element_values);			
@@ -1015,6 +1039,12 @@ $(function () {
 			weatherLayer.setMap(map);
 		}
 		
+		$(".map_toolbar button").each(function () {
+			if (!$(this).hasClass( "active" )) {
+				$(this).addClass( "inactive" );
+			}
+		});
+		
 		// ADD NEW OBJECT OR VERTEX POINT
 		
 		// Add marker
@@ -1139,13 +1169,19 @@ $(function () {
 			var custom_kmls = myKmls.join();
 			custom_kmls = '<ul>' + custom_kmls.replace(/\,/g, '') + '</ul>';
 			
+			if (myKmls != '') {
+				var has_custom_kmls = '<h4>' + custom_kmls_msg + '</h4>' +
+				'<div style="max-height: 100px;overflow: auto">' +
+				custom_kmls +
+				'</div>' +
+				'<hr />';
+			} else {
+				var has_custom_kmls = '';
+			}
+			
 			var infowindowKml =
 			'<div id="infowindow_kml" style="cursor: pointer">' +
-			'<h4>' + custom_kmls_msg + '</h4>' +
-			'<div style="max-height: 100px;overflow: auto">' +
-			custom_kmls +
-			'</div>' +
-			'<hr />' +
+			has_custom_kmls +
 			'<h4>' + kml_url_msg + '</h4>' +
 			'<p><input type="text" id="kml_url" size="80" value="' + $('#post_excerpt').attr('value') +'" /></p>' +
 			'<p><input type="button" id="save" value="OK" /></p>' +
@@ -1184,6 +1220,7 @@ $(function () {
 			'<div class="col70">' +
 			'<p><label for="directions_start">' + directions_start_msg + '</label><input type="text" id="directions_start" size="40" value="" /></p>' +
 			'<p><label for="directions_end">' + directions_end_msg + '</label><input type="text" id="directions_end" size="40" value="" /></p>' +
+			'<p><label for="directions_show"><input type="checkbox" id="directions_show" />' + directions_show_msg + '</label></p>' +
 			'</div>' +
 			'<div class="col30">' +
 			'<p><label for="stroke_color">' + stroke_color_msg + '</label><input type="text" id="stroke_color" size="10" class="colorpicker" value="' + color +'" /></p>' +
@@ -1226,6 +1263,7 @@ $(function () {
 			
 			$(".map_toolbar button").each(function () {
 				$(this).removeClass( "active" );
+				$(this).removeClass( "inactive" );
 			});
 			$("#delete_map").blur();
 			

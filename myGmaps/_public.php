@@ -306,6 +306,7 @@ class dcMyGmapsPublic
 					$aElementOptions['stroke_color'] = $parts[4];
 					$aElementOptions['stroke_opacity'] = $parts[3];
 					$aElementOptions['stroke_weight'] = $parts[2];
+					$aElementOptions['display_direction'] = ( isset($parts[5]) && $parts[5] ? $parts[5] : false);
 
 					$sElementsTemplate .= mygmapsPublic::getMapElementOptions($aElementOptions);
 				}
