@@ -1039,6 +1039,12 @@ $(function () {
 			weatherLayer.setMap(map);
 		}
 		
+		$(".map_toolbar button").each(function () {
+			if (!$(this).hasClass( "active" )) {
+				$(this).addClass( "inactive" );
+			}
+		});
+		
 		// ADD NEW OBJECT OR VERTEX POINT
 		
 		// Add marker
