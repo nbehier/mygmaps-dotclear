@@ -558,6 +558,13 @@ $(function () {
 			var weight = parts[2];
 			var opacity = parts[3];
 			var color = parts[4];
+			var show = parts[5];
+			
+			if (show == 'true') {
+				var state = 'checked = "checked"';
+			} else {
+				var state = '';
+			}
 			
 			var infowindowDirections =
 			'<div id="infowindow_directions" style="cursor: pointer">' +
@@ -565,6 +572,7 @@ $(function () {
 			'<div class="col70">' +
 			'<p><label for="directions_start">' + directions_start_msg + '</label><input type="text" id="directions_start" size="40" value="' + start + '" /></p>' +
 			'<p><label for="directions_end">' + directions_end_msg + '</label><input type="text" id="directions_end" size="40" value="' + end + '" /></p>' +
+			'<p><label for="directions_show"><input type="checkbox" id="directions_show" ' + state + ' />' + directions_show_msg + '</label></p>' +
 			'</div>' +
 			'<div class="col30">' +
 			'<p><label for="stroke_color">' + stroke_color_msg + '</label><input type="text" id="stroke_color" size="10" class="colorpicker" value="' + color +'" />' +
@@ -750,6 +758,7 @@ $(function () {
 			
 			var start = $('#directions_start').attr('value');
 			var end = $('#directions_end').attr('value');
+			var show = $('#directions_show').prop('checked');
 			var color = $('#stroke_color').attr('value');
 			var opacity = $('#stroke_opacity').attr('value');
 			var weight = $('#stroke_weight').attr('value');
@@ -783,7 +792,7 @@ $(function () {
 			// Save values and type
 			
 			element_values = start + "|" + end + "|" + weight +
-				"|" + opacity + "|" + color;
+				"|" + opacity + "|" + color + "|" + show;
 			
 			$('#element_type').val('directions');
 			$('#post_excerpt').val(element_values);			
@@ -1205,6 +1214,7 @@ $(function () {
 			'<div class="col70">' +
 			'<p><label for="directions_start">' + directions_start_msg + '</label><input type="text" id="directions_start" size="40" value="" /></p>' +
 			'<p><label for="directions_end">' + directions_end_msg + '</label><input type="text" id="directions_end" size="40" value="" /></p>' +
+			'<p><label for="directions_show"><input type="checkbox" id="directions_show" />' + directions_show_msg + '</label></p>' +
 			'</div>' +
 			'<div class="col30">' +
 			'<p><label for="stroke_color">' + stroke_color_msg + '</label><input type="text" id="stroke_color" size="10" class="colorpicker" value="' + color +'" /></p>' +

@@ -484,6 +484,7 @@ if ($post_id) {
 		'var custom_kmls_msg = \''.__('Custom Kml files').'\';'."\n".
 		'var directions_start_msg = \''.__('Start:').'\';'."\n".
 		'var directions_end_msg = \''.__('End:').'\';'."\n".
+		'var directions_show_msg = \''.__('Display directions panel in public map').'\';'."\n".
 		'//]]>'."\n".
 	'</script>';
 	
