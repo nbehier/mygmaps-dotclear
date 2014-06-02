@@ -1,7 +1,7 @@
 <?php
 // Language: Français 
 // Module: myGmaps - 4.6.1
-// Date: 2014-06-02 07:07:21 
+// Date: 2014-06-02 10:30:58 
 // Translated with dcTranslater - 2013.05.11 
 
 #_admin.php:17
@@ -154,15 +154,15 @@ $GLOBALS['__l10n']['Default map options'] = 'Options des cartes par défaut';
 $GLOBALS['__l10n']['Save configuration'] = 'Enregistrer la configuration';
 
 #element.map.php:48
-#element.map.php:697
+#element.map.php:693
 $GLOBALS['__l10n']['New map element'] = 'Nouvel élément de carte';
 
 #element.map.php:156
 $GLOBALS['__l10n']['This map element does not exist.'] = 'Cet élément de carte n\'existe pas';
 
 #element.map.php:181
-#element.map.php:697
-#element.map.php:702
+#element.map.php:693
+#element.map.php:698
 #inc/lib.pager.php:242
 $GLOBALS['__l10n']['Edit map element'] = 'Éditer l\'élément de carte';
 
@@ -266,22 +266,7 @@ $GLOBALS['__l10n']['Directions'] = 'Itinéraire';
 $GLOBALS['__l10n']['Initialize map'] = 'Initialiser la carte';
 
 #element.map.php:665
-$GLOBALS['__l10n']['This map will not be displayed on the blog. It is here only for positioning your element.'] = 'Cette carte ne sera pas affichée sur le blog, elle n\'est destinée qu\'à positionner votre élément.';
-
-#element.map.php:666
-$GLOBALS['__l10n']['Choose your tool'] = 'Sélectionnez votre outil';
-
-#element.map.php:667
-$GLOBALS['__l10n']['Click on map'] = 'Cliquez sur la carte';
-
-#element.map.php:668
-$GLOBALS['__l10n']['Enhance render and parameters'] = 'Améliorez le rendu et les différents réglages';
-
-#element.map.php:669
-$GLOBALS['__l10n']['Save your map element'] = 'Enregistrez votre élément de carte';
-
-#element.map.php:670
-$GLOBALS['__l10n']['Create a new one'] = 'Créez-en un nouveau';
+$GLOBALS['__l10n']['This map will not be displayed on the blog and is meant only to create, edit and position only one element at a time. Choose a tool and click on the map to create your element, then click on the element to edit its properties.'] = 'Cette carte ne sera pas affichée sur le blog, et n\'est destinée qu\'à créer, positionner ou éditer un seul élément à la fois. Choisissez un outil, cliquez sur la carte pour créer votre élément, puis cliquer sur l\'élément pour modifier ses propriétés.';
 
 #inc/class.dcactionmaps.php:49
 $GLOBALS['__l10n']['Back to map elements list'] = 'Retour à la liste des éléments';
@@ -308,5 +293,21 @@ $GLOBALS['__l10n']['Elements list'] = 'Liste des éléments';
 
 #inc/lib.pager.php:247
 $GLOBALS['__l10n']['Remove map element'] = 'Supprimer l\'élément de carte';
+
+$GLOBALS['__l10n']['This map will not be displayed on the blog and is meant only to create, edit and position one element at a time. Choose a tool and click on the map to create your element, then click on the element to edit its properties.'] = 'Cette carte ne sera pas affichée sur le blog, et n\'est destinée qu\'à créer, postionner ou éditer un élément à la fois. Choisissez un outil, cliquez sur la carte pour créer votre élément, puis cliquer sur l\'élément pour modifier ses propriétés.';
+
+$GLOBALS['__l10n']['This map will not be displayed on the blog. Choose a tool and click on the map to create your element, then click on the element to edit its properties.'] = 'Cette carte ne sera pas affichée sur le blog. Choisissez un outil et cliquez sur la carte pour créer votre élément, puis cliquez sur l\'élément pour modifier ses propriétés.';
+
+$GLOBALS['__l10n']['This map will not be displayed on the blog. It is here only for positioning your element.'] = 'Cette carte ne sera pas affichée sur le blog, elle n\'est destinée qu\'à positionner votre élément.';
+
+$GLOBALS['__l10n']['Choose your tool'] = 'Sélectionnez votre outil';
+
+$GLOBALS['__l10n']['Click on map'] = 'Cliquez sur la carte';
+
+$GLOBALS['__l10n']['Enhance render and parameters'] = 'Améliorez le rendu et les différents réglages';
+
+$GLOBALS['__l10n']['Save your map element'] = 'Enregistrez votre élément de carte';
+
+$GLOBALS['__l10n']['Create a new one'] = 'Créez-en un nouveau';
 
 ?>

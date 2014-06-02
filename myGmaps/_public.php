@@ -455,8 +455,15 @@ class myGmapsPublic
 						'origin: "'.$parts[0].'",'."\n".
 						'destination: "'.$parts[1].'",'."\n".
 						'travelMode: google.maps.TravelMode.DRIVING'."\n".
-					'};'."\n".
-					'$("#map_box_'.$sPostId.'").addClass( "directions" );'."\n".
+					'};'."\n";
+					
+					if( isset($parts[5]) && $parts[5] == 'true' ) {
+						$sTemplate .= '$("#map_box_'.$sPostId.'").addClass( "directions" );'."\n";
+					} else {
+						$sTemplate .= '$("#map_box_'.$sPostId.'").addClass( "no-directions" );'."\n";
+					}
+					
+					$sTemplate .= 
 					'directionsService.route(request, function(result, status) {'."\n".
 						'if (status == google.maps.DirectionsStatus.OK) {'."\n".
 							'var routePath = result.routes[0].overview_path;'."\n".
