@@ -306,6 +306,7 @@ EOT;
         $sStrokeOpacity = $aOptions['stroke_opacity'];
         $sStrokeWeight = $aOptions['stroke_weight'];
 
+        $sPath = '';
         foreach($sCoordinates as $sPoint) {
             $sPath .= 'new google.maps.LatLng(' . $sPoint . '),';
         }
@@ -342,6 +343,7 @@ EOT;
         $sFillColor = $aOptions['fill_color'];
         $sFillOpacity = $aOptions['fill_opacity'];
 
+        $sPath = '';
         foreach($sCoordinates as $sPoint) {
             $sPath .= 'new google.maps.LatLng(' . $sPoint . '),';
         }
@@ -421,11 +423,6 @@ EOT;
         $sFillOpacity = $aOptions['fill_opacity'];
 
         $sOutput = <<<EOT
-var bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng({$sBound1}),
-    new google.maps.LatLng({$sBound2})
-);
-
 var circle = new google.maps.Circle({
     center: new google.maps.LatLng({$sCenter}),
     radius: {$sRadius},
