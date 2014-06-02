@@ -1,7 +1,7 @@
 <?php
 // Language: Français 
-// Module: myGmaps - 4.4
-// Date: 2014-05-29 07:04:25 
+// Module: myGmaps - 4.6.1
+// Date: 2014-06-02 07:07:21 
 // Translated with dcTranslater - 2013.05.11 
 
 #_admin.php:17
@@ -9,22 +9,22 @@
 #add.map.php:455
 #config.maps.php:23
 #config.maps.php:373
-#element.map.php:525
+#element.map.php:528
 #inc/class.dcactionmaps.php:21
 #inc/class.dcactionmaps.php:36
 #inc/class.dcactionmaps.php:43
 $GLOBALS['__l10n']['Google Maps'] = 'Cartes Google';
 
 #_admin.php:129
-$GLOBALS['__l10n']['Are you sure you want to remove this map?'] = 'Êtes-vous certain de vouloir supprimer la carte ?';
+$GLOBALS['__l10n']['Are you sure you want to remove this map?'] = 'Voulez-vous vraiment supprimer cette carte ?';
 
 #_admin.php:135
-$GLOBALS['__l10n']['Are you sure you want to remove this element?'] = 'Êtes-vous certain de vouloir supprimer cet élément ?';
+$GLOBALS['__l10n']['Are you sure you want to remove this element?'] = 'Voulez-vous vraiment supprimer cet élément ?';
 
 #_admin.php:170
 #_admin.php:181
 #_admin.php:195
-$GLOBALS['__l10n']['Google Map:'] = 'Carte Google';
+$GLOBALS['__l10n']['Google Map:'] = 'Carte Google :';
 
 #_admin.php:172
 $GLOBALS['__l10n']['No map'] = 'Pas de carte';
@@ -48,12 +48,8 @@ $GLOBALS['__l10n']['Remove map'] = 'Supprimer la carte';
 #_admin.php:214
 $GLOBALS['__l10n']['Included elements list'] = 'Liste des éléments inclus';
 
-#_public.php:463
+#_public.php:527
 $GLOBALS['__l10n']['Sorry, javascript must be activated in your browser to see this map.'] = 'Désolé, javascript doit être activé dans votre navigateur pour voir cette carte.';
-
-#add.map.php:151
-#config.maps.php:120
-$GLOBALS['__l10n']['none'] = 'non défini';
 
 #add.map.php:152
 #config.maps.php:121
@@ -148,129 +144,150 @@ $GLOBALS['__l10n']['New element'] = 'Nouvel élément';
 #config.maps.php:459
 $GLOBALS['__l10n']['Selected map elements action:'] = 'Action sur les éléments de carte sélectionnés :';
 
-#config.maps.php:484
-$GLOBALS['__l10n']['Settings'] = 'Paramètres';
-
 #config.maps.php:489
 $GLOBALS['__l10n']['Enable extension for this blog'] = 'Activer l\'extension pour ce blog';
 
 #config.maps.php:491
 $GLOBALS['__l10n']['Default map options'] = 'Options des cartes par défaut';
 
-#element.map.php:46
-#element.map.php:688
+#config.maps.php:505
+$GLOBALS['__l10n']['Save configuration'] = 'Enregistrer la configuration';
+
+#element.map.php:48
+#element.map.php:697
 $GLOBALS['__l10n']['New map element'] = 'Nouvel élément de carte';
 
-#element.map.php:154
+#element.map.php:156
 $GLOBALS['__l10n']['This map element does not exist.'] = 'Cet élément de carte n\'existe pas';
 
-#element.map.php:179
-#element.map.php:688
-#element.map.php:693
+#element.map.php:181
+#element.map.php:697
+#element.map.php:702
 #inc/lib.pager.php:242
 $GLOBALS['__l10n']['Edit map element'] = 'Éditer l\'élément de carte';
 
-#element.map.php:189
+#element.map.php:191
 $GLOBALS['__l10n']['Next element'] = 'Élément suivant';
 
-#element.map.php:196
+#element.map.php:198
 $GLOBALS['__l10n']['Previous element'] = 'Élément précédent';
 
-#element.map.php:278
-#element.map.php:278
 #element.map.php:280
-#element.map.php:283
+#element.map.php:280
+#element.map.php:282
+#element.map.php:285
 $GLOBALS['__l10n']['No description.'] = 'Pas de description.';
 
-#element.map.php:473
+#element.map.php:475
 $GLOBALS['__l10n']['Stroke color'] = 'Couleur du trait';
 
-#element.map.php:474
+#element.map.php:476
 $GLOBALS['__l10n']['Stroke opacity'] = 'Opacité du trait';
 
-#element.map.php:475
+#element.map.php:477
 $GLOBALS['__l10n']['Stroke weight'] = 'Épaisseur du trait';
 
-#element.map.php:476
+#element.map.php:478
 $GLOBALS['__l10n']['Fill color'] = 'Couleur du fond';
 
-#element.map.php:477
+#element.map.php:479
 $GLOBALS['__l10n']['Fill opacity'] = 'Opacité du fond';
 
-#element.map.php:478
+#element.map.php:480
 $GLOBALS['__l10n']['Default icons'] = 'Icônes par défaut';
 
-#element.map.php:479
+#element.map.php:481
 $GLOBALS['__l10n']['Custom icons'] = 'Icônes personnelles';
 
-#element.map.php:482
+#element.map.php:484
 $GLOBALS['__l10n']['Custom Kml files'] = 'Fichiers kml personnels';
 
-#element.map.php:483
+#element.map.php:485
 $GLOBALS['__l10n']['Start:'] = 'Départ :';
 
-#element.map.php:484
+#element.map.php:486
 $GLOBALS['__l10n']['End:'] = 'Arrivée :';
 
-#element.map.php:543
-$GLOBALS['__l10n']['Map element has been updated.'] = 'L\'élément de carte a été mis à jour.';
+#element.map.php:487
+$GLOBALS['__l10n']['Display directions panel in public map'] = 'Afficher les détails sur la carte publique';
 
 #element.map.php:546
+$GLOBALS['__l10n']['Map element has been updated.'] = 'L\'élément de carte a été mis à jour.';
+
+#element.map.php:549
 $GLOBALS['__l10n']['Map element has been created.'] = 'L\'élément de carte a été créé.';
 
-#element.map.php:576
+#element.map.php:579
 $GLOBALS['__l10n']['Map element status'] = 'État de l\'élément';
 
-#element.map.php:584
+#element.map.php:587
 $GLOBALS['__l10n']['Element language'] = 'Langue de l\'élément';
 
-#element.map.php:601
+#element.map.php:604
 $GLOBALS['__l10n']['Selected element'] = 'Élément sélectionné';
 
-#element.map.php:645
+#element.map.php:648
 $GLOBALS['__l10n']['Position:'] = 'Position :';
 
-#element.map.php:650
-#element.map.php:650
+#element.map.php:653
+#element.map.php:653
 $GLOBALS['__l10n']['Point of interest'] = 'Point d\'intérêt';
 
-#element.map.php:651
-#element.map.php:651
+#element.map.php:654
+#element.map.php:654
 $GLOBALS['__l10n']['Polyline'] = 'Ligne brisée';
 
-#element.map.php:652
-#element.map.php:652
+#element.map.php:655
+#element.map.php:655
 $GLOBALS['__l10n']['Polygon'] = 'Polygone';
 
-#element.map.php:654
-#element.map.php:654
+#element.map.php:656
+#element.map.php:656
+$GLOBALS['__l10n']['Rectangle'] = 'Rectangle';
+
+#element.map.php:657
+#element.map.php:657
 $GLOBALS['__l10n']['Circle'] = 'Cercle';
 
-#element.map.php:655
-#element.map.php:655
-$GLOBALS['__l10n']['Included Kml file'] = 'Fichier Kml inclus';
+#element.map.php:658
+#element.map.php:658
+$GLOBALS['__l10n']['Included Kml file'] = 'Fichier kml inclus';
 
-#element.map.php:656
-#element.map.php:656
+#element.map.php:659
+#element.map.php:659
 $GLOBALS['__l10n']['GeoRSS Feed'] = 'Flux GeoRSS';
 
-#element.map.php:657
-#element.map.php:657
+#element.map.php:660
+#element.map.php:660
 $GLOBALS['__l10n']['Directions'] = 'Itinéraire';
 
-#element.map.php:658
-#element.map.php:658
-$GLOBALS['__l10n']['Weather'] = 'Météo';
-
-#element.map.php:659
-#element.map.php:659
+#element.map.php:662
+#element.map.php:662
 $GLOBALS['__l10n']['Initialize map'] = 'Initialiser la carte';
 
-#element.map.php:662
+#element.map.php:665
 $GLOBALS['__l10n']['This map will not be displayed on the blog. It is here only for positioning your element.'] = 'Cette carte ne sera pas affichée sur le blog, elle n\'est destinée qu\'à positionner votre élément.';
+
+#element.map.php:666
+$GLOBALS['__l10n']['Choose your tool'] = 'Sélectionnez votre outil';
+
+#element.map.php:667
+$GLOBALS['__l10n']['Click on map'] = 'Cliquez sur la carte';
+
+#element.map.php:668
+$GLOBALS['__l10n']['Enhance render and parameters'] = 'Améliorez le rendu et les différents réglages';
+
+#element.map.php:669
+$GLOBALS['__l10n']['Save your map element'] = 'Enregistrez votre élément de carte';
+
+#element.map.php:670
+$GLOBALS['__l10n']['Create a new one'] = 'Créez-en un nouveau';
 
 #inc/class.dcactionmaps.php:49
 $GLOBALS['__l10n']['Back to map elements list'] = 'Retour à la liste des éléments';
+
+#inc/class.dcactionmaps.php:66
+$GLOBALS['__l10n']['Map elements actions'] = 'Actions sur les éléments';
 
 #inc/class.dcactionmaps.php:163
 #inc/class.dcactionmaps.php:173
@@ -290,60 +307,6 @@ $GLOBALS['__l10n']['Element language:'] = 'Langue de l\'élément :';
 $GLOBALS['__l10n']['Elements list'] = 'Liste des éléments';
 
 #inc/lib.pager.php:247
-$GLOBALS['__l10n']['Remove map element'] = 'Supprimer l\'élément';
-
-$GLOBALS['__l10n']['Map'] = 'Carte';
-
-$GLOBALS['__l10n']['Maps'] = 'Cartes';
-
-$GLOBALS['__l10n']['Google Map'] = 'Carte Google :';
-
-$GLOBALS['__l10n']['Map content'] = 'Contenu de la carte';
-
-$GLOBALS['__l10n']['Map element published on:'] = 'Elément de carte publié le :';
-
-$GLOBALS['__l10n']['Insert map'] = 'Insérer une carte';
-
-$GLOBALS['__l10n']['Change category for selected elements'] = 'Changer la catégorie des éléments sélectionnés';
-
-$GLOBALS['__l10n']['Change author for selected elements'] = 'Changer l\'auteur des éléments sélectionnés';
-
-$GLOBALS['__l10n']['Change lang for selected elements'] = 'Changer la langue des éléments sélectionnés';
-
-$GLOBALS['__l10n']['Choose map center, zoom level and map type. This map will be displayed on the blog with all added elements.'] = 'Choisir le centre de la carte, le niveau de zoom et le type de carte. Cette carte sera affichée sur le blog avec les éléments que vous y aurez ajoutés.';
-
-$GLOBALS['__l10n']['View map'] = 'Voir la carte';
-
-$GLOBALS['__l10n']['Include kml file'] = 'Inclure un fichier kml';
-
-$GLOBALS['__l10n']['This map elements'] = 'Éléments de la carte';
-
-$GLOBALS['__l10n']['Info window content:'] = 'Contenu de l\'infobulle';
-
-$GLOBALS['__l10n']['Map element type'] = 'Type d\'élément';
-
-$GLOBALS['__l10n']['Map element type:'] = 'Type d\'élément :';
-
-$GLOBALS['__l10n']['No element'] = 'Pas d\'élément';
-
-$GLOBALS['__l10n']['No element (empty map)'] = 'Pas d\'élément (carte vide)';
-
-$GLOBALS['__l10n']['Add a map'] = 'Ajouter une carte';
-
-$GLOBALS['__l10n']['Add a map to page'] = 'Ajouter une carte à la page';
-
-$GLOBALS['__l10n']['Default map parameters'] = 'Paramètres des cartes par défaut';
-
-$GLOBALS['__l10n']['Radius'] = 'Rayon';
-
-$GLOBALS['__l10n']['Choose your tool'] = 'Sélectionnez votre outil';
-
-$GLOBALS['__l10n']['Click on map'] = 'Cliquez sur la carte';
-
-$GLOBALS['__l10n']['Enhance render and parameters'] = 'Améliorez le rendu et les différents réglages';
-
-$GLOBALS['__l10n']['Save your map element'] = 'Enregistrez votre élément de carte';
-
-$GLOBALS['__l10n']['Create a new one'] = 'Créez-en un nouveau';
+$GLOBALS['__l10n']['Remove map element'] = 'Supprimer l\'élément de carte';
 
 ?>
